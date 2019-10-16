@@ -6,24 +6,24 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCustomersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->string('subdomain')->unique();
+            $table->string('db_database')->unique();
+            $table->string('db_hostname');
+            $table->string('db_username');
+            $table->string('db_password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('customers');
