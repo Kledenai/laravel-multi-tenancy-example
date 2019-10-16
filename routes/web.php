@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('404', function () {
+    return 'error 404';
+});
+
 Route::get('/', function () {
     return view('welcome');
 });

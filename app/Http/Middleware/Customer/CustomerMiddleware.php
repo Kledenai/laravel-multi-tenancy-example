@@ -3,18 +3,23 @@
 namespace App\Http\Middleware\Customer;
 
 use Closure;
+use App\Models\Customer;
 
 class CustomerMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle($request, Closure $next)
     {
+        $customer = $this->getCustomer($request->getHost());
+
+        if (!$customer) {
+            return redirect()->route('404');
+        }
+
         return $next($request);
+    }
+
+    public function getCustomer($host)
+    {
+        return Customer::where('subdomain', $host)->first();
     }
 }
