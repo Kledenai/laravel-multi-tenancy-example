@@ -13,7 +13,7 @@
 
 Route::get('404', function () {
     return 'error 404';
-});
+})->name('404.error');
 
 Route::get('/', function () {
     return view('welcome');
